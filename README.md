@@ -42,15 +42,18 @@ A seven-step SQL data pipeline was developed to:
 Exploratory Data Analysis
 
 EDA included:
-•	Dataset overview
+•	Dataset overview and dimensions
+•	Data type review
 •	Missing value analysis
 •	Duplicate record validation
 •	Summary statistics
-•	Payment distributions
+•	Historical payment distributions
 •	Target class distribution
+•	Payment type comparison
+•	High-value versus non-high-value physician comparison
 •	Correlation analysis
-•	Geographic analysis
-•	Historical payment behavior
+•	Geographic distribution by state
+•	Historical physician activity patterns
 
 Machine Learning
 
@@ -105,3 +108,6 @@ Contact and Further Information
 Author: Colleen Yap
 Program: University of California, Berkeley Extension
 Course: Professional Program in Machine Learning and Artificial Intelligence
+
+Open in Colab:
+https://colab.research.google.com/drive/17YQQAHK_5ldO8yWI9ks_gVeDdzAMx3Ro?usp=sharing
