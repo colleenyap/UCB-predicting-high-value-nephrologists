@@ -6,7 +6,7 @@ Colleen Yap
 
 Executive Summary
 
-The goal of this project is to determine whether historical physician–industry payment patterns can be used to predict which nephrologists will become high-value industry partners in the following year. Using publicly available CMS Open Payments General Payments data, I developed a complete machine learning workflow that included SQL-based data engineering, feature engineering, exploratory data analysis (EDA), predictive modeling, and model evaluation. Historical payment data from 2020–2023 were used to create physician-level features, while 2024 payment data served as the prediction target. Among the models evaluated, Gradient Boosting delivered the strongest performance with a ROC-AUC of 0.9068, demonstrating that historical physician–industry engagement is a strong predictor of future high-value industry relationships.
+The goal of this project is to determine whether historical physician–industry payment patterns can be used to predict which nephrologists will become high-value physicians in the following year. Using publicly available CMS Open Payments General Payments data, I developed a complete machine learning workflow that included SQL-based data engineering, feature engineering, exploratory data analysis (EDA), predictive modeling, and model evaluation. Historical payment data from 2020–2023 were used to create physician-level features, while 2024 payment data served as the prediction target. Among the models evaluated, Gradient Boosting delivered the strongest performance with a ROC-AUC of 0.9068, demonstrating that historical physician–industry engagement is a strong predictor of future high-value physician–industry engagement.
 
 Rationale
 
@@ -19,8 +19,7 @@ Can historical physician–industry payment patterns from 2020–2023 be used to
 Data Sources
 The project uses publicly available CMS Open Payments General Payments datasets obtained from the Centers for Medicare & Medicaid Services (CMS).
 
-Source:
-
+Source: CMS Open Payments Data
 https://openpaymentsdata.cms.gov/
 
 Data included:
@@ -29,12 +28,16 @@ Data included:
 •	Physician specialty: Nephrology
 Historical payment data from 2020–2023 were used to engineer physician-level predictor variables, while the 2024 General Payments dataset was used to construct the target variable and evaluate model performance.
 Methodology
-The project followed a complete end-to-end machine learning workflow.
+
+The project followed a structured machine learning workflow that included:
+
 Data Engineering
+
 A seven-step SQL data pipeline was developed to:
+
 •	Combine annual CMS Open Payments datasets from 2020 to 2024
 •	Filter records to nephrology physicians
-•	Aggregate physician payment history
+•	Aggregate physician-year payment history
 •	Engineer historical physician features
 •	Create the 2024 prediction target
 •	Build the final machine learning dataset
@@ -42,6 +45,7 @@ A seven-step SQL data pipeline was developed to:
 Exploratory Data Analysis
 
 EDA included:
+
 •	Dataset overview and dimensions
 •	Data type review
 •	Missing value analysis
@@ -82,23 +86,24 @@ Among the four machine learning models evaluated, Gradient Boosting achieved the
 •	Recall: 0.7824
 •	F1-score: 0.5648
 
-The results show that historical physician–industry engagement, including payment history, consulting activity, and the breadth of industry relationships - provides meaningful predictive information for identifying physicians who are likely to become high-value industry partners.
+The results show that historical physician–industry engagement—including payment frequency, consulting activity, payment diversity, and the breadth of industry relationships—provides meaningful predictive information for identifying physicians who are likely to become high value.
 
 Next Steps
 Future work may include:
 •	Expanding the analysis to additional physician specialties.
-•	Validating the model using future CMS Open Payments releases.
+•	Validating the methodology using future CMS Open Payments releases.
 •	Comparing model predictions with internal CRM data to evaluate physician engagement strategies.
 
 Outline of Project
-•	Introduction
-•	Data Engineering
-•	Exploratory Data Analysis (EDA)
-•	Machine Learning Model Development
-•	Model Evaluation
-•	Results
-•	Discussion
-•	Conclusion
+• Introduction
+• Data Engineering
+• Exploratory Data Analysis (EDA)
+• Machine Learning Model Development
+• Model Evaluation
+• Prediction Validation
+• Analysis and Business Interpretation
+• Results and Discussion
+• Conclusion
 
 Project Files
 •	Jupyter Notebook: Predicting_Future_High_Value_Physician–Industry_Relationships_Among_Nephrologists_Using_CMS_Open_Payments_Data.ipynb
