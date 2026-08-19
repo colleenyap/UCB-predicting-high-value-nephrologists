@@ -1,4 +1,4 @@
-# Predicting Future High-Value Physician--Industry Relationships Among Nephrologists Using CMS Open Payments Data
+# Predicting Future High-Value Physician-Industry Relationships Among Nephrologists Using CMS Open Payments Data
 
 **Author:** Colleen Yap  
 **Program:** Professional Certificate in Machine Learning \& Artificial
