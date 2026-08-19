@@ -1,118 +1,243 @@
-# UCB-predicting-high-value-nephrologists
-Predicting Future High-Value Physician–Industry Relationships Among Nephrologists Using CMS Open Payments Data
+# Predicting Future High-Value Physician--Industry Relationships Among Nephrologists Using CMS Open Payments Data
 
-Author
-Colleen Yap
+**Author:** Colleen Yap  
+**Program:** Professional Certificate in Machine Learning \& Artificial
+Intelligence
 
-Executive Summary
+## Executive Summary
 
-The goal of this project is to determine whether historical physician–industry payment patterns can be used to predict which nephrologists will become high-value physicians in the following year. Using publicly available CMS Open Payments General Payments data, I developed a complete machine learning workflow that included SQL-based data engineering, feature engineering, exploratory data analysis (EDA), predictive modeling, and model evaluation. Historical payment data from 2020–2023 were used to create physician-level features, while 2024 payment data served as the prediction target. Among the models evaluated, Gradient Boosting delivered the strongest performance with a ROC-AUC of 0.9068, demonstrating that historical physician–industry engagement is a strong predictor of future high-value physician–industry engagement.
+The objective of this project is to determine whether historical CMS
+Open Payments activity can be used to identify and rank nephrology
+recipients who are more likely to become high-value payment recipients
+in the following year.
 
-Rationale
+Using publicly available CMS Open Payments General Payments data,
+historical features were developed from 2020-2023 payment activity and
+used to predict high-value recipient status in 2024. Four classification
+algorithms were evaluated: Logistic Regression, Decision Tree, Random
+Forest, and Gradient Boosting. Gradient Boosting was subsequently
+optimized using five-fold cross-validation and Grid Search, followed by
+classification-threshold selection using cross-validated training
+predictions.
 
-The CMS Open Payments program provides transparency into financial relationships between physicians and life sciences companies, but it is primarily used to report historical transactions. This project explores whether those historical records can also be used to predict future physician–industry engagement.
-For biotechnology and pharmaceutical companies developing kidney disease therapies, identifying physicians who are likely to become highly engaged with industry can support more informed commercial and medical affairs planning. Rather than relying solely on past payment reports, predictive analytics can help identify physicians who may become future collaborators, speakers, educators, or research partners.
+The final tuned Gradient Boosting model used a **0.30 classification
+threshold** and achieved **92.82% accuracy, 66.67% precision, 69.82%
+recall, an F1-score of 0.6821, and a ROC-AUC of 0.8933** on the
+independent test set. The model correctly identified **118 of 169 actual
+high-value recipients**.
 
-Research Question
+The final model is intended as a **ranking and prioritization tool**
+that complements professional judgment and other relevant organizational
+information rather than serving as a standalone decision-making tool.
 
-Can historical physician–industry payment patterns from 2020–2023 be used to predict which nephrologists will receive high-value industry payments in 2024?
-Data Sources
-The project uses publicly available CMS Open Payments General Payments datasets obtained from the Centers for Medicare & Medicaid Services (CMS).
+## Business Problem
 
-Source: CMS Open Payments Data
-https://openpaymentsdata.cms.gov/
+CMS Open Payments provides transparency into financial relationships
+between life sciences companies and covered healthcare recipients,
+including physicians and certain other healthcare professionals such as
+nurse practitioners. The data are primarily retrospective and describe
+payment activity that has already occurred.
 
-Data included:
+This project evaluates whether historical payment and
+industry-engagement patterns can provide an additional data-driven
+signal for identifying nephrology recipients who are more likely to
+become high value in a subsequent year. When engagement resources are
+limited, model-generated rankings may help focus further review on
+recipients with stronger predictive signals.
 
-•	CMS Open Payments General Payments (2020–2024)
-•	Physician specialty: Nephrology
-Historical payment data from 2020–2023 were used to engineer physician-level predictor variables, while the 2024 General Payments dataset was used to construct the target variable and evaluate model performance.
-Methodology
+## Research Question
 
-The project followed a structured machine learning workflow that included:
+**Can historical CMS Open Payments patterns from 2020--2023 be used to
+predict and rank nephrology recipients according to their likelihood of
+becoming high-value payment recipients in 2024?**
 
-Data Engineering
+For the 2024 outcome, recipients with total General Payments meeting or
+exceeding the study's high-value threshold of **$2,054.10** were
+classified as high value. In the final modeling dataset, **845 of 7,664
+recipients (11.03%)** were classified as high value and **6,819
+(88.97%)** as non-high value.
 
-A seven-step SQL data pipeline was developed to:
+## Data Source
 
-•	Combine annual CMS Open Payments datasets from 2020 to 2024
-•	Filter records to nephrology physicians
-•	Aggregate physician-year payment history
-•	Engineer historical physician features
-•	Create the 2024 prediction target
-•	Build the final machine learning dataset
+The project uses publicly available **CMS Open Payments General
+Payments** data from 2020 through 2024.
 
-Exploratory Data Analysis
+* Source: [CMS Open Payments](https://openpaymentsdata.cms.gov/)
+* Historical predictor period: **2020--2023**
+* Prediction outcome: **2024 high-value status**
+* Specialty: **Nephrology**
 
-EDA included:
+## Data Engineering
 
-•	Dataset overview and dimensions
-•	Data type review
-•	Missing value analysis
-•	Duplicate record validation
-•	Summary statistics
-•	Historical payment distributions
-•	Target class distribution
-•	Payment type comparison
-•	High-value versus non-high-value physician comparison
-•	Correlation analysis
-•	Geographic distribution by state
-•	Historical physician activity patterns
+A SQL Server data pipeline was used to clean, integrate, aggregate, and
+engineer the modeling data.
 
-Machine Learning
+The historical 2020--2023 table contained **10,532 recipients**, while
+the separately created 2024 target table contained approximately **8,698
+recipients**. A **LEFT OUTER JOIN** combined the two tables, keeping
+historical recipients even when no matching 2024 record existed;
+unmatched recipients were classified as non-high value. After the
+complete join and modeling criteria were applied, the final dataset
+contained **7,664 recipients**.
 
-The following classification models were developed and compared:
-•	Logistic Regression
-•	Decision Tree
-•	Random Forest
-•	Gradient Boosting
+Historical predictors included payment amounts, payment frequency, years
+of activity, payment categories, and measures of the breadth and
+diversity of industry relationships.
 
-Model performance was evaluated using:
-•	Accuracy
-•	Precision
-•	Recall
-•	F1-score
-•	ROC-AUC
-•	Confusion Matrix
-•	ROC Curve
-•	Feature Importance
+## Exploratory Data Analysis
 
-Results
+EDA examined:
 
-The final modeling dataset contained 11,044 physicians, with historical features derived from 2020–2023 and a binary target representing high-value physicians in 2024.
-A physician was classified as high value if total 2024 General Payments were at or above the 90th percentile ($2,057.67).
-Among the four machine learning models evaluated, Gradient Boosting achieved the strongest overall performance:
-•	ROC-AUC: 0.9068
-•	Recall: 0.7824
-•	F1-score: 0.5648
+* Dataset structure, data types, missing values, and duplicate records
+* Target class distribution
+* Historical payment distributions and skewness
+* Consulting, speaker or honoraria, travel and lodging, and food and
+beverage payments
+* Recipient primary type and geographic distribution
+* Active years and payment-frequency patterns
+* High-value versus non-high-value recipient characteristics
+* Correlations between historical features and 2024 high-value status
 
-The results show that historical physician–industry engagement—including payment frequency, consulting activity, payment diversity, and the breadth of industry relationships—provides meaningful predictive information for identifying physicians who are likely to become high value.
+Correlation analysis showed that consulting activity, payment-type
+diversity, and payment frequency had meaningful relationships with
+future high-value status. Payment-amount variables often showed weaker
+individual linear correlations, although the final Gradient Boosting
+model found some payment-amount features useful when considered jointly
+with other predictors.
 
-Next Steps
-Future work may include:
-•	Expanding the analysis to additional physician specialties.
-•	Validating the methodology using future CMS Open Payments releases.
-•	Comparing model predictions with internal CRM data to evaluate physician engagement strategies.
+## Machine Learning Methodology
 
-Outline of Project
-• Introduction
-• Data Engineering
-• Exploratory Data Analysis (EDA)
-• Machine Learning Model Development
-• Model Evaluation
-• Prediction Validation
-• Analysis and Business Interpretation
-• Results and Discussion
-• Conclusion
+Four classification algorithms were developed and compared:
 
-Project Files
-•	Jupyter Notebook: Predicting_Future_High_Value_Physician–Industry_Relationships_Among_Nephrologists_Using_CMS_Open_Payments_Data.ipynb
+* Logistic Regression
+* Decision Tree
+* Random Forest
+* Gradient Boosting
 
-Contact and Further Information
+The workflow also included:
 
-Author: Colleen Yap
-Program: University of California, Berkeley Extension
-Course: Professional Program in Machine Learning and Artificial Intelligence
+* Stratified train/test splitting
+* One-hot encoding of categorical variables
+* Standardization of numerical features where appropriate
+* Five-fold stratified cross-validation
+* Grid Search hyperparameter tuning for Gradient Boosting
+* Cross-validated classification-threshold selection
+* Feature-importance analysis
+* Ranking and business-prioritization validation
 
-Open in Colab:
-https://colab.research.google.com/drive/17YQQAHK_5ldO8yWI9ks_gVeDdzAMx3Ro?usp=sharing
+Grid Search identified the following Gradient Boosting hyperparameters:
+
+* `learning\_rate = 0.05`
+* `max\_depth = 2`
+* `min\_samples\_leaf = 5`
+* `n\_estimators = 200`
+
+The best cross-validated ROC-AUC was **0.9178**. Cross-validated
+training predictions were then used to evaluate alternative
+classification thresholds, and **0.30** was selected because it provided
+the strongest F1-score while maintaining relatively high recall.
+
+## Model Performance
+
+\---
+
+Model            Accuracy    Precision       Recall     F1 Score      ROC-AUC
+
+\---
+
+Tuned              0.9282       0.6667       0.6982   **0.6821**   **0.8933**
+Gradient  
+Boosting  
+(0.30)
+
+Gradient           0.9022       0.5404   **0.7515**       0.6287       0.8920
+Boosting
+
+Random         **0.9341**       0.7742       0.5680       0.6553       0.8851
+Forest
+
+Logistic           0.9276   **0.7959**       0.4615       0.5843       0.8621
+Regression
+
+Decision           0.9002       0.5465       0.5562       0.5513       0.7495
+Tree
+---
+
+The **tuned Gradient Boosting model with a 0.30 threshold** was selected
+as the final model. It achieved the highest ROC-AUC and F1-score while
+maintaining substantially higher recall than Random Forest and Logistic
+Regression. This provided the strongest overall balance for the
+project's ranking and prioritization objective.
+
+## Key Findings
+
+* Historical CMS Open Payments activity contains meaningful predictive
+information about future high-value status.
+* Consulting activity, payment-type diversity, payment frequency, and
+other recurring engagement measures were associated with future
+high-value status.
+* The final model achieved a **ROC-AUC of 0.8933** and identified
+**69.82% of actual high-value recipients** in the independent test
+set.
+* The final tuned model correctly identified **118 of 169** actual
+high-value recipients.
+* Gradient Boosting captured nonlinear relationships and interactions
+that were not fully reflected by simple linear correlations.
+* Model-generated probabilities can be used to rank recipients for
+further review when resources are limited.
+* Results represent predictive associations and should not be
+interpreted as causal relationships.
+
+## Recommendations and Next Steps
+
+The final model should be used as a ranking and prioritization tool
+rather than as a standalone decision rule. Predicted probabilities can
+be considered alongside professional judgment, clinical expertise, CRM
+information, and other relevant organizational data.
+
+Future work could:
+
+* Validate the model across additional prediction years and medical
+specialties
+* Incorporate additional CMS Open Payments categories, including
+Research Payments and Ownership Interests
+* Compare model rankings with internal CRM and engagement data
+* Monitor performance and retrain the model as new CMS Open Payments
+data become available
+* Evaluate model stability and threshold selection across future
+populations
+
+## Project Structure
+
+The Jupyter Notebook is organized into the following sections:
+
+1. Introduction
+2. Data Engineering
+3. Exploratory Data Analysis (EDA)
+4. Data Preparation
+5. Model Development
+6. Model Evaluation
+7. Prediction Validation
+8. Analysis and Business Interpretation
+9. Results and Discussion
+10. Conclusion
+11. Recommendations and Next Steps
+
+## Project Files
+
+* **Jupyter Notebook:**
+`Predicting\_Future\_High\_Value\_Physician\_Industry\_Relationships.ipynb`
+* **README:** `README.md`
+
+## [Open in Colab](https://colab.research.google.com/drive/17YQQAHK_5ldO8yWI9ks_gVeDdzAMx3Ro#scrollTo=Yo01Ruf306ZZ)
+
+
+
+
+
+## Author
+
+**Colleen Yap**  
+University of California, Berkeley Extension  
+Professional Program in Machine Learning and Artificial Intelligence
+
