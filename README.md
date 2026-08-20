@@ -1,7 +1,7 @@
 # Predicting Future High-Value Physician-Industry Relationships Among Nephrologists Using CMS Open Payments Data
 
 **Author:** Colleen Yap  
-**Program:** Professional Certificate in Machine Learning \& Artificial
+**Program:** Professional Certificate in Machine Learning & Artificial
 Intelligence
 
 ## Executive Summary
@@ -53,11 +53,7 @@ recipients with stronger predictive signals.
 predict and rank nephrology recipients according to their likelihood of
 becoming high-value payment recipients in 2024?**
 
-For the 2024 outcome, recipients with total General Payments meeting or
-exceeding the study's high-value threshold of **$2,054.10** were
-classified as high value. In the final modeling dataset, **845 of 7,664
-recipients (11.03%)** were classified as high value and **6,819
-(88.97%)** as non-high value.
+For the 2024 outcome, high-value status was defined using the 90th percentile of total 2024 General Payments, resulting in a threshold of $2,054.10. Recipients with total payments at or above this threshold were classified as high value. In the final modeling dataset, 845 of 7,664 recipients (11.03%) were classified as high value and 6,819 (88.97%) as non-high value.
 
 <img width="884" height="153" alt="HighValueVsNonHighValue" src="https://github.com/user-attachments/assets/638ac671-ad72-4999-98bf-da860b23c143" />
 
@@ -104,7 +100,7 @@ beverage payments
 * High-value versus non-high-value recipient characteristics
 * Correlations between historical features and 2024 high-value status
 
-Correlation analysis showed that payment-type diversity and payment frequency had the strongest relationships with future high-value status. Food and beverage activity and speaker or honoraria payments also showed positive associations with the outcome. In contrast, payment-amount variables showed relatively weak individual linear correlations with future high-value status, although some of these features contributed to the final Gradient Boosting model when considered alongside other predictors.
+Correlation analysis showed that payment-type diversity and payment frequency had some of the strongest individual linear relationships with future high-value status. Food and beverage activity and speaker or honoraria payments also showed positive associations with the outcome. In contrast, payment-amount variables showed relatively weak individual linear correlations. However, the final Gradient Boosting model relied heavily on historical payment amounts, suggesting that these variables became more informative when nonlinear relationships and interactions with other predictors were considered.
 
 <img width="694" height="682" alt="CorrelationTo2024" src="https://github.com/user-attachments/assets/44c89ce6-fd06-449b-9cfb-bbf3e74c1c80" />
 
@@ -131,10 +127,10 @@ The workflow also included:
 
 Grid Search identified the following Gradient Boosting hyperparameters:
 
-* `learning\_rate = 0.05`
-* `max\_depth = 2`
-* `min\_samples\_leaf = 5`
-* `n\_estimators = 200`
+* `learning_rate = 0.05`
+* `max_depth = 2`
+* `min_samples_leaf = 5`
+* `n_estimators = 200`
 
 The best cross-validated ROC-AUC was **0.9178**. Cross-validated
 training predictions were then used to evaluate alternative
@@ -172,6 +168,14 @@ Tree
 ---
 <img width="1347" height="786" alt="image" src="https://github.com/user-attachments/assets/6b1b3d9c-4997-4d3c-bbff-407ca1ba4c66" />
 
+| Model | Accuracy | Precision | Recall | F1 Score | ROC-AUC |
+|---|---:|---:|---:|---:|---:|
+| **Tuned Gradient Boosting (0.30)** | 0.9282 | 0.6667 | 0.6982 | **0.6821** | **0.8933** |
+| Gradient Boosting | 0.9022 | 0.5404 | **0.7515** | 0.6287 | 0.8920 |
+| Random Forest | **0.9341** | 0.7742 | 0.5680 | 0.6553 | 0.8851 |
+| Logistic Regression | 0.9276 | **0.7959** | 0.4615 | 0.5843 | 0.8621 |
+| Decision Tree | 0.9002 | 0.5465 | 0.5562 | 0.5513 | 0.7495 |
+
 The **tuned Gradient Boosting model with a 0.30 threshold** was selected
 as the final model. It achieved the highest ROC-AUC and F1-score while
 maintaining substantially higher recall than Random Forest and Logistic
@@ -182,9 +186,7 @@ project's ranking and prioritization objective.
 
 * Historical CMS Open Payments activity contains meaningful predictive
 information about future high-value status.
-* Consulting activity, payment-type diversity, payment frequency, and
-other recurring engagement measures were associated with future
-high-value status.
+* Payment-type diversity and payment frequency showed some of the strongest individual correlations with future high-value status, while historical payment amounts were the most important features in the final Gradient Boosting model.
 * The final model achieved a **ROC-AUC of 0.8933** and identified
 **69.82% of actual high-value recipients** in the independent test
 set.
@@ -206,9 +208,9 @@ rather than as a standalone decision rule. Predicted probabilities can
 be considered alongside professional judgment, clinical expertise, CRM
 information, and other relevant organizational data.
 
-## Future work could
+**Future work could:**
 
-* Validate the model across additional prediction years and medical
+-* Validate the model across additional prediction years and medical
 specialties
 * Incorporate additional CMS Open Payments categories, including
 Research Payments and Ownership Interests
