@@ -49,7 +49,7 @@ recipients with stronger predictive signals.
 
 ## Research Question
 
-**Can historical CMS Open Payments patterns from 2020--2023 be used to
+**Can historical CMS Open Payments patterns from 2020-2023 be used to
 predict and rank nephrology recipients according to their likelihood of
 becoming high-value payment recipients in 2024?**
 
