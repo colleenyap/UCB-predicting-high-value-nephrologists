@@ -26,6 +26,8 @@ recall, an F1-score of 0.6821, and a ROC-AUC of 0.8933** on the
 independent test set. The model correctly identified **118 of 169 actual
 high-value recipients**.
 
+<img width="429" height="686" alt="image" src="https://github.com/user-attachments/assets/fa3ad5bf-e990-4a33-9ec6-bf691c4caa1c" />
+
 The final model is intended as a **ranking and prioritization tool**
 that complements professional judgment and other relevant organizational
 information rather than serving as a standalone decision-making tool.
