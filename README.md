@@ -145,29 +145,6 @@ the strongest F1-score while maintaining relatively high recall.
 
 ## Model Performance
 
-\---
-
-Model            Accuracy    Precision       Recall     F1 Score      ROC-AUC
-
-\---
-
-Tuned              0.9282       0.6667       0.6982   **0.6821**   **0.8933**
-Gradient  
-Boosting  
-(0.30)
-
-Gradient           0.9022       0.5404   **0.7515**       0.6287       0.8920
-Boosting
-
-Random         **0.9341**       0.7742       0.5680       0.6553       0.8851
-Forest
-
-Logistic           0.9276   **0.7959**       0.4615       0.5843       0.8621
-Regression
-
-Decision           0.9002       0.5465       0.5562       0.5513       0.7495
-Tree
----
 <img width="1347" height="786" alt="image" src="https://github.com/user-attachments/assets/6b1b3d9c-4997-4d3c-bbff-407ca1ba4c66" />
 
 | Model | Accuracy | Precision | Recall | F1 Score | ROC-AUC |
@@ -212,7 +189,7 @@ information, and other relevant organizational data.
 
 **Future work could:**
 
--* Validate the model across additional prediction years and medical
+* Validate the model across additional prediction years and medical
 specialties
 * Incorporate additional CMS Open Payments categories, including
 Research Payments and Ownership Interests
@@ -241,7 +218,7 @@ The Jupyter Notebook is organized into the following sections:
 ## Project Files
 
 * **Jupyter Notebook:**
-`Predicting\_Future\_High\_Value\_Physician\_Industry\_Relationships.ipynb`
+`Predicting_Future_High_Value_Physician_Industry_Relationships.ipynb`
 * **README:** `README.md`
 
 ## [Open in Colab](https://colab.research.google.com/drive/17YQQAHK_5ldO8yWI9ks_gVeDdzAMx3Ro#scrollTo=Yo01Ruf306ZZ)
