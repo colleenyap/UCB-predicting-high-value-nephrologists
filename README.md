@@ -100,6 +100,8 @@ beverage payments
 * High-value versus non-high-value recipient characteristics
 * Correlations between historical features and 2024 high-value status
 
+<img width="521" height="308" alt="image" src="https://github.com/user-attachments/assets/6506d79b-6232-4282-919e-1401cb0a2058" />
+
 Correlation analysis showed that payment-type diversity and payment frequency had some of the strongest individual linear relationships with future high-value status. Food and beverage activity and speaker or honoraria payments also showed positive associations with the outcome. In contrast, payment-amount variables showed relatively weak individual linear correlations. However, the final Gradient Boosting model relied heavily on historical payment amounts, suggesting that these variables became more informative when nonlinear relationships and interactions with other predictors were considered.
 
 <img width="694" height="682" alt="CorrelationTo2024" src="https://github.com/user-attachments/assets/44c89ce6-fd06-449b-9cfb-bbf3e74c1c80" />
