@@ -74,15 +74,16 @@ engineer the modeling data.
 
 The historical 2020--2023 table contained **10,532 recipients**, while
 the separately created 2024 target table contained approximately **8,698
-recipients**. A **LEFT OUTER JOIN** combined the two tables, keeping
-historical recipients even when no matching 2024 record existed;
-unmatched recipients were classified as non-high value. After the
-complete join and modeling criteria were applied, the final dataset
+recipients**. An **INNER JOIN** combined the two tables, keeping
+historical recipients with matching 2024 records. After the
+inner join and modeling criteria were applied, the final dataset
 contained **7,664 recipients**.
 
 Historical predictors included payment amounts, payment frequency, years
 of activity, payment categories, and measures of the breadth and
 diversity of industry relationships.
+
+<img width="1909" height="1126" alt="image" src="https://github.com/user-attachments/assets/1e56f1dc-265f-42a3-a6dc-8d87ad74ebcd" />
 
 ## Exploratory Data Analysis
 
