@@ -57,6 +57,9 @@ classified as high value. In the final modeling dataset, **845 of 7,664
 recipients (11.03%)** were classified as high value and **6,819
 (88.97%)** as non-high value.
 
+<img width="884" height="153" alt="HighValueVsNonHighValue" src="https://github.com/user-attachments/assets/638ac671-ad72-4999-98bf-da860b23c143" />
+
+
 ## Data Source
 
 The project uses publicly available **CMS Open Payments General
@@ -99,12 +102,10 @@ beverage payments
 * High-value versus non-high-value recipient characteristics
 * Correlations between historical features and 2024 high-value status
 
-Correlation analysis showed that consulting activity, payment-type
-diversity, and payment frequency had meaningful relationships with
-future high-value status. Payment-amount variables often showed weaker
-individual linear correlations, although the final Gradient Boosting
-model found some payment-amount features useful when considered jointly
-with other predictors.
+Correlation analysis showed that payment-type diversity and payment frequency had the strongest relationships with future high-value status. Food and beverage activity and speaker or honoraria payments also showed positive associations with the outcome. In contrast, payment-amount variables showed relatively weak individual linear correlations with future high-value status, although some of these features contributed to the final Gradient Boosting model when considered alongside other predictors.
+
+<img width="694" height="682" alt="CorrelationTo2024" src="https://github.com/user-attachments/assets/44c89ce6-fd06-449b-9cfb-bbf3e74c1c80" />
+
 
 ## Machine Learning Methodology
 
@@ -138,6 +139,10 @@ training predictions were then used to evaluate alternative
 classification thresholds, and **0.30** was selected because it provided
 the strongest F1-score while maintaining relatively high recall.
 
+<img width="411" height="230" alt="image" src="https://github.com/user-attachments/assets/31952191-3041-43f2-a5d6-46e3c9ec36ab" />
+
+
+
 ## Model Performance
 
 \---
@@ -163,6 +168,7 @@ Regression
 Decision           0.9002       0.5465       0.5562       0.5513       0.7495
 Tree
 ---
+<img width="1347" height="786" alt="image" src="https://github.com/user-attachments/assets/6b1b3d9c-4997-4d3c-bbff-407ca1ba4c66" />
 
 The **tuned Gradient Boosting model with a 0.30 threshold** was selected
 as the final model. It achieved the highest ROC-AUC and F1-score while
@@ -189,6 +195,8 @@ further review when resources are limited.
 * Results represent predictive associations and should not be
 interpreted as causal relationships.
 
+<img width="904" height="701" alt="image" src="https://github.com/user-attachments/assets/8850f7e6-401c-4f74-9b4e-60eb077d10f1" />
+
 ## Recommendations and Next Steps
 
 The final model should be used as a ranking and prioritization tool
@@ -196,7 +204,7 @@ rather than as a standalone decision rule. Predicted probabilities can
 be considered alongside professional judgment, clinical expertise, CRM
 information, and other relevant organizational data.
 
-Future work could:
+## Future work could
 
 * Validate the model across additional prediction years and medical
 specialties
